@@ -21,4 +21,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Comando para arrancar con el puerto que asigna Railway
-CMD uvicorn servidor.aplicacion:app --host 0.0.0.0 --port ${PORT:-8000}
+CMD sh -c "uvicorn servidor.aplicacion:app --host 0.0.0.0 --port ${PORT:-8000}"
