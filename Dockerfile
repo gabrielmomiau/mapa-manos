@@ -20,5 +20,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el proyecto
 COPY . .
 
-# Comando para arrancar - Railway inyecta PORT como variable de entorno
-CMD ["sh", "-c", "uvicorn servidor.aplicacion:app --host 0.0.0.0 --port ${PORT:-8000}"]
+# Comando para arrancar - usa Python para leer variable PORT
+CMD ["python", "run.py"]
