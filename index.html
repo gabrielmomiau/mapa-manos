@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Una experiencia de realidad aumentada que convierte las palmas en un mapa vivo."
+    />
+    <title>La soldadura del mundo</title>
+  </head>
+  <body class="experiencia-page">
+    <main class="stage-wrap">
+      <video id="camara" class="camera-source" playsinline muted></video>
+      <canvas id="escena" aria-label="Cámara con ilustraciones sobre las manos"></canvas>
+
+      <section class="start-overlay" id="inicio">
+        <div class="start-actions">
+          <p id="estadoInicio">Preparando el reconocimiento de manos…</p>
+          <button id="activarCamara" type="button" disabled>Activar cámara</button>
+          <small>La imagen se procesa en este dispositivo y no se envía a ningún servidor.</small>
+        </div>
+      </section>
+
+      <div class="status-card" id="statusCard" aria-live="polite"></div>
+
+      <nav class="controls" aria-label="Navegación">
+        <a class="archivo-button" href="./archivo.html">Archivo</a>
+      </nav>
+    </main>
+    <script src="/src/principal.js" type="module"></script>
+  </body>
+</html>

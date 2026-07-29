@@ -8,3 +8,7 @@ venv/
 .DS_Store
 *.log
 *.tmp
+node_modules/
+dist/
+public/models/
+public/wasm/
