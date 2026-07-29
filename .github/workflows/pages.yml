@@ -2,7 +2,7 @@ name: Publicar en GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, agent/sitio-estatico-github-pages]
   workflow_dispatch:
 
 permissions:
