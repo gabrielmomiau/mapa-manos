@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "descripcion": "Configuración alternativa de anclajes (archivo de referencia, no usado actualmente por el código)",
+  "anclasDisponibles": [
+    "centro_palma",
+    "muneca",
+    "base_pulgar",
+    "punta_pulgar",
+    "base_indice",
+    "punta_indice",
+    "base_medio",
+    "punta_medio",
+    "base_anular",
+    "punta_anular",
+    "base_menique",
+    "punta_menique"
+  ],
+  "manosDisponibles": [
+    "palma izquierda",
+    "palma derecha",
+    "ambas"
+  ],
+  "capas": []
+}

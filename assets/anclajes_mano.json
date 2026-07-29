@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "descripcion": "Anclajes manuales de capas por mano y por punto. Basado en guia-manos/Guia.png",
+  "anclasDisponibles": [
+    "centro_palma",
+    "muneca",
+    "base_pulgar",
+    "punta_pulgar",
+    "base_indice",
+    "punta_indice",
+    "base_medio",
+    "punta_medio",
+    "base_anular",
+    "punta_anular",
+    "base_menique",
+    "punta_menique"
+  ],
+  "manosDisponibles": [
+    "palma izquierda",
+    "palma derecha",
+    "ambas"
+  ],
+  "capas": [
+    {
+      "id": "manomapa_elementos_mesa_1",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 1.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "punta_anular",
+      "desplazamientoRel": [
+        0.0,
+        -0.35
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "encima de la punta del dedo anular derecho"
+    },
+    {
+      "id": "manomapa_elementos_mesa_2",
+      "archivo": "animales/Manomapa elementos_Mesa 2.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "punta_indice",
+      "desplazamientoRel": [
+        0.0,
+        -0.35
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "encima de la punta del dedo índice derecho"
+    },
+    {
+      "id": "manomapa_elementos_mesa_3",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 3.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "punta_pulgar",
+      "desplazamientoRel": [
+        -0.3,
+        -0.35
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "diagonal a la izquierda de la punta del pulgar derecho"
+    },
+    {
+      "id": "manomapa_elementos_mesa_4",
+      "archivo": "animales/Manomapa elementos_Mesa 4.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "punta_pulgar",
+      "desplazamientoRel": [
+        0.0,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "en la punta del pulgar izquierdo"
+    },
+    {
+      "id": "manomapa_elementos_mesa_5",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 5.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "base_medio",
+      "desplazamientoRel": [
+        0.0,
+        0.25
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "debajo de la base del dedo medio derecho"
+    },
+    {
+      "id": "manomapa_elementos_mesa_6",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 6.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "base_pulgar",
+      "desplazamientoRel": [
+        0.50,
+        0.20
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "3 cm a la derecha de la base del pulgar derecho"
+    },
+    {
+      "id": "manomapa_elementos_mesa_7",
+      "archivo": "paisaje/Manomapa elementos_Mesa 7.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "base_anular",
+      "desplazamientoRel": [
+        -0.15,
+        0.90
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "2 cm más abajo de la imagen Mesa_5"
+    },
+    {
+      "id": "manomapa_elementos_mesa_8",
+      "archivo": "barcos/Manomapa elementos_Mesa 8.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "base_menique",
+      "desplazamientoRel": [
+        0.70,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "3 cm a la derecha de la base del dedo meñique derecho"
+    },
+    {
+      "id": "manomapa_elementos_mesa_9",
+      "archivo": "barcos/Manomapa elementos_Mesa 9.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "punta_anular",
+      "desplazamientoRel": [
+        0.0,
+        -0.35
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "encima del dedo anular izquierdo"
+    },
+    {
+      "id": "manomapa_elementos_mesa_10",
+      "archivo": "paisaje/Manomapa elementos_Mesa 10.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "base_menique",
+      "desplazamientoRel": [
+        0.15,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "a la derecha del punto base del dedo meñique izquierdo"
+    },
+    {
+      "id": "manomapa_elementos_mesa_11",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 11.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "centro_palma",
+      "desplazamientoRel": [
+        0.0,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "en el centro de la palma derecha"
+    },
+    {
+      "id": "manomapa_elementos_mesa_12",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 12.png",
+      "manoObjetivo": "palma derecha",
+      "ancla": "muneca",
+      "desplazamientoRel": [
+        0.0,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "en la muñeca de la palma derecha"
+    },
+    {
+      "id": "manomapa_elementos_mesa_13",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 13.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "base_pulgar",
+      "desplazamientoRel": [
+        0.20,
+        0.10
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "diagonal a la derecha de la base del pulgar izquierdo"
+    },
+    {
+      "id": "manomapa_elementos_mesa_14",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 14.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "base_indice",
+      "desplazamientoRel": [
+        0.0,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "en la base del dedo índice izquierdo"
+    },
+    {
+      "id": "manomapa_elementos_mesa_15",
+      "archivo": "paisaje/Manomapa elementos_Mesa 15.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "centro_palma",
+      "desplazamientoRel": [
+        0.0,
+        0.25
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "abajo del centro de la palma izquierda"
+    },
+    {
+      "id": "manomapa_elementos_mesa_16",
+      "archivo": "nombres-lugares/Manomapa elementos_Mesa 16.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "muneca",
+      "desplazamientoRel": [
+        0.0,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "en la muñeca de la palma izquierda"
+    },
+    {
+      "id": "manomapa_elementos_mesa_17",
+      "archivo": "animales/Manomapa elementos_Mesa 17.png",
+      "manoObjetivo": "palma izquierda",
+      "ancla": "punta_indice",
+      "desplazamientoRel": [
+        -0.25,
+        0.0
+      ],
+      "escalaRel": 0.2,
+      "opacidad": 0.9,
+      "fusion": "source-over",
+      "rotacionExtra": 0.0,
+      "nota": "a la izquierda del tercer punto del dedo índice izquierdo"
+    }
+  ]
+}

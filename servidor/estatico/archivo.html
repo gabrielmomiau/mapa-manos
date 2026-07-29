@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archivo 𓊝</title>
+    <link rel="stylesheet" href="/estatico/styles.css" />
+  </head>
+  <body>
+    <main class="archivo-page">
+      <section class="archivo-content">
+        <h1>Archivo 𓊝</h1>
+        <div class="archivo-hint" id="archivoHint">Aún no hay capturas. Usa el botón de cámara desde la página principal.</div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <a class="archivo-back" href="/">Volver</a>
+      </section>
+    </main>
+
+    <div class="archivo-mail-modal" id="archivoMailModal" aria-hidden="true">
+      <div class="archivo-mail-dialog" role="dialog" aria-modal="true" aria-labelledby="archivoMailTitulo">
+        <button class="archivo-mail-close" id="archivoMailClose" type="button" aria-label="Cerrar popup">✕</button>
+        <h2 id="archivoMailTitulo">Escribe tu correo</h2>
+        <form id="archivoMailForm" class="archivo-mail-form">
+          <label for="archivoMailInput" class="archivo-mail-label">Correo</label>
+          <div class="archivo-mail-field-row">
+            <input id="archivoMailInput" name="email" type="email" placeholder="tucorreo@ejemplo.com" required />
+            <button id="archivoMailAtButton" class="archivo-mail-at" type="button" aria-label="Insertar arroba">@</button>
+          </div>
+          <input id="archivoMailImage" name="imageUrl" type="hidden" />
+          <div class="archivo-mail-actions">
+            <button type="button" class="archivo-mail-cancel" id="archivoMailCancel">Cerrar</button>
+            <button type="submit" class="archivo-mail-submit">Enviar</button>
+          </div>
+          <p class="archivo-mail-message" id="archivoMailMessage"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="archivo-preview-modal" id="archivoPreviewModal" aria-hidden="true">
+      <div class="archivo-preview-dialog" role="dialog" aria-modal="true" aria-label="Vista previa de captura">
+        <button class="archivo-preview-close" id="archivoPreviewClose" type="button" aria-label="Cerrar vista previa">✕</button>
+        <img id="archivoPreviewImage" src="" alt="Vista previa de la foto" />
+      </div>
+    </div>
+
+    <script src="/estatico/app.js" type="module"></script>
+  </body>
+</html>
