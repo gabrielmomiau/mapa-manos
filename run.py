@@ -3,11 +3,12 @@ import os
 import subprocess
 import sys
 
-port = os.getenv("PORT", "8000")
-print(f"Starting on port {port}")
-subprocess.run([
+port = int(os.getenv("PORT", 8000))
+print(f"🚀 Starting Manomapa on port {port}...")
+sys.exit(subprocess.call([
     sys.executable, "-m", "uvicorn",
     "servidor.aplicacion:app",
     "--host", "0.0.0.0",
-    "--port", port
-])
+    "--port", str(port),
+    "--log-level", "info"
+]))
