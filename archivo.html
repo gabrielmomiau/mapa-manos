@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Archivo local de imágenes creadas en La soldadura del mundo."
+    />
+    <title>Archivo — La soldadura del mundo</title>
+  </head>
+  <body>
+    <main class="archivo-page">
+      <section class="archivo-content">
+        <h1>Archivo 𓊝</h1>
+        <div class="archivo-hint" id="archivoHint">Cargando capturas…</div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <a class="archivo-back" href="./index.html">Volver</a>
+      </section>
+    </main>
+
+    <div class="archivo-preview-modal" id="archivoPreviewModal" aria-hidden="true">
+      <div class="archivo-preview-dialog" role="dialog" aria-modal="true" aria-label="Vista previa">
+        <button class="archivo-preview-close" id="archivoPreviewClose" type="button" aria-label="Cerrar">
+          ×
+        </button>
+        <img id="archivoPreviewImage" src="" alt="Vista previa de la captura" />
+      </div>
+    </div>
+
+    <script src="/src/archivo.js" type="module"></script>
+  </body>
+</html>

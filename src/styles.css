@@ -1,0 +1,423 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+@font-face {
+  font-family: "Adelphe Trouble";
+  src: url("../assets/fonts/Adelphe-Trouble-FlorealRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Adelphe Trouble";
+  src: url("../assets/fonts/Adelphe-Trouble-FlorealBoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  color: #182026;
+  background: #f2f0e9;
+  font-family: "Adelphe Trouble", Georgia, serif;
+  font-synthesis: none;
+  --papel: #f2f0e9;
+  --agua: #d7e0d8;
+  --tinta: #182026;
+  --boton: #9a4337;
+  --boton-activo: #7f362c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.experiencia-page {
+  overflow: hidden;
+  background: #000;
+}
+
+.stage-wrap {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+}
+
+.camera-source {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#escena {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.start-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: end center;
+  padding: max(2rem, 6vh) 1.25rem;
+  background:
+    linear-gradient(rgba(245, 238, 225, 0.86), rgba(245, 238, 225, 0.92)),
+    url("../assets/portada/Titulo servidor.png") center / min(92vw, 1100px) auto no-repeat;
+  backdrop-filter: blur(14px);
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease;
+}
+
+.start-overlay.oculto {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.start-actions {
+  display: grid;
+  justify-items: center;
+  width: min(100%, 34rem);
+  gap: 0.8rem;
+  text-align: center;
+}
+
+.start-actions p {
+  min-height: 1.3em;
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.start-actions small {
+  max-width: 28rem;
+  color: rgb(24 32 38 / 72%);
+  font-family: system-ui, sans-serif;
+  font-size: 0.78rem;
+}
+
+.start-actions button,
+.archivo-button,
+.archivo-back {
+  min-height: 3rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+  color: #fff;
+  background: var(--boton);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    transform 120ms ease;
+}
+
+.start-actions button:hover:not(:disabled),
+.archivo-button:hover,
+.archivo-back:hover {
+  background: var(--boton-activo);
+  transform: translateY(-1px);
+}
+
+.start-actions button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.status-card {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 0 1.5rem;
+  color: #18313d;
+  font-size: clamp(1.2rem, 2.8vw, 2.6rem);
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.1;
+  text-align: center;
+  white-space: pre-line;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 85%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.status-card.portada {
+  background:
+    linear-gradient(rgb(245 238 225 / 88%), rgb(245 238 225 / 88%)),
+    url("../assets/portada/Titulo servidor.png") center / contain no-repeat;
+  color: transparent;
+  backdrop-filter: blur(14px);
+}
+
+.status-card.feedback-live {
+  color: #fff;
+  background: transparent;
+  text-shadow: 0 2px 14px rgb(0 0 0 / 85%);
+}
+
+.status-card.visible {
+  opacity: 1;
+}
+
+.status-card.capture-flash {
+  background: url("../assets/portada/!!!.png") center / contain no-repeat;
+  color: transparent;
+}
+
+.controls {
+  position: absolute;
+  z-index: 8;
+  right: 1.25rem;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.archivo-button,
+.archivo-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Adelphe Trouble", Georgia, serif;
+  font-size: 0.95rem;
+}
+
+.archivo-page {
+  min-height: 100vh;
+  padding: 3rem 1.5rem 1.5rem;
+  background: linear-gradient(180deg, var(--papel), var(--agua));
+}
+
+.archivo-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.1rem, 3vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+.archivo-hint {
+  margin: 1rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgb(24 32 38 / 8%);
+  border-radius: 1rem;
+  color: rgb(24 32 38 / 85%);
+  background: rgb(255 255 255 / 90%);
+}
+
+.archivo-hint[hidden] {
+  display: none;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 14px 36px rgb(24 32 38 / 15%);
+}
+
+.gallery-image-link {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: #111;
+  cursor: zoom-in;
+}
+
+.gallery-image-link:focus-visible {
+  outline-color: var(--boton);
+  outline-offset: -5px;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.gallery-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.75rem 0.85rem;
+}
+
+.gallery-meta > span {
+  overflow: hidden;
+  color: rgb(24 32 38 / 85%);
+  font-size: 0.88rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gallery-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gallery-share,
+.gallery-download,
+.gallery-delete {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--boton);
+  font-size: 0.95rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.gallery-share[hidden] {
+  display: none;
+}
+
+.gallery-item:hover .gallery-share,
+.gallery-item:hover .gallery-download,
+.gallery-item:hover .gallery-delete,
+.gallery-item:focus-within .gallery-share,
+.gallery-item:focus-within .gallery-download,
+.gallery-item:focus-within .gallery-delete {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.archivo-back {
+  position: fixed;
+  z-index: 20;
+  left: 1.25rem;
+  bottom: 1.25rem;
+}
+
+.archivo-preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(24 32 38 / 70%);
+}
+
+.archivo-preview-modal.visible {
+  display: grid;
+}
+
+.archivo-preview-dialog {
+  position: relative;
+  width: min(100%, 56rem);
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 18px 48px rgb(24 32 38 / 25%);
+}
+
+.archivo-preview-dialog img {
+  display: block;
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 0.7rem;
+  object-fit: contain;
+  background: #f8f8f8;
+}
+
+.archivo-preview-close {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: none;
+  border-radius: 999px;
+  color: #5a2b25;
+  background: #f1e5e2;
+  font-family: "Segoe UI Symbol", Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .start-overlay {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+    background-size: 95vw auto;
+  }
+
+  .archivo-page {
+    padding: 3rem 1rem 1.5rem;
+  }
+}
+
+@media (hover: none) {
+  .gallery-share,
+  .gallery-download,
+  .gallery-delete {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

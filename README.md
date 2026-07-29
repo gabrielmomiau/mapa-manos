@@ -1,100 +1,67 @@
-# Mapa Manos (Raspberry Pi 5)
+# La soldadura del mundo — Mapa Manos
 
-Base de proyecto para capturar video en vivo con una camara OV5647, detectar palmas de manos y superponer elementos visuales (PNG) como un "mapa vivo" que se mueve con la mano.
+Experiencia web de realidad aumentada que detecta dos palmas, ancla ilustraciones sobre sus puntos
+y toma una captura automática cuando ambas se mantienen abiertas.
 
-## Arquitectura
+La versión actual es un sitio estático: la cámara, MediaPipe, la composición y las capturas se
+procesan enteramente en el navegador. No necesita Python, Raspberry Pi ni un servidor de
+aplicación.
 
-- Servidor Python (FastAPI): captura camara, detecta mano/palma y publica datos por WebSocket.
-- Vision por computador: Picamera2 (si esta disponible), MediaPipe Hands y OpenCV.
-- Interfaz web (Canvas): recibe fotogramas + puntos de mano + transformaciones y compone capas en tiempo real.
+## Cómo funciona
+
+- `getUserMedia` obtiene la cámara con permiso explícito de la persona.
+- MediaPipe Hand Landmarker se ejecuta localmente mediante WebAssembly.
+- `assets/anclajes_mano.json` relaciona cada ilustración con una mano y un punto anatómico.
+- Canvas compone la cámara y las ilustraciones sin subir fotogramas.
+- IndexedDB guarda las capturas únicamente en el navegador que las creó.
+- La página Archivo permite previsualizar, compartir/descargar y borrar esas capturas.
+
+El archivo local no se sincroniza entre dispositivos y se pierde si la persona borra los datos del
+sitio. El envío automático por correo de la versión Python se retiró porque un sitio estático no
+puede proteger credenciales SMTP; si vuelve a ser necesario deberá conectarse una función externa.
+
+## Desarrollo
+
+Requiere Node.js 22 o posterior.
+
+```bash
+npm install
+npm run dev
+```
+
+La primera ejecución descarga el modelo oficial de Hand Landmarker y copia el runtime WebAssembly
+a `public/`. Esos archivos generados no se versionan.
+
+Comprobaciones:
+
+```bash
+npm test
+npm run build
+```
+
+El resultado publicable queda en `dist/`. La compilación usa rutas relativas, de modo que funciona
+tanto en un dominio propio como en una URL de proyecto del tipo
+`https://usuario.github.io/mapa-manos/`.
+
+## Publicación en GitHub Pages
+
+El workflow `.github/workflows/pages.yml` compila y publica automáticamente cada cambio que llegue
+a `main`.
+
+En GitHub hay que abrir **Settings → Pages** y seleccionar **GitHub Actions** como fuente. La cámara
+funciona allí porque GitHub Pages sirve el sitio por HTTPS.
 
 ## Estructura
 
-- `servidor/`: logica de captura, rastreo y API web.
-- `servidor/estatico/`: interfaz web para visualizacion/proyeccion.
-- `assets/`: ilustraciones PNG separadas por categoria.
-- `guiones/`: utilidades para preparar y ejecutar en Raspberry Pi.
+- `src/`: detección, mapeo, render, almacenamiento y estilos.
+- `assets/`: ilustraciones, tipografías y configuración manual de anclajes.
+- `public/`: archivos que se copian directamente a la entrega.
+- `tests/`: pruebas unitarias de la lógica geométrica.
+- `legacy/raspberry-pi/`: prototipo anterior conservado como referencia.
 
-## Requisitos del sistema (Raspberry Pi OS)
+## Privacidad y compatibilidad
 
-1. Camara habilitada:
-   - `sudo raspi-config` -> Interface Options -> Camera -> Enable
-2. Librerias de sistema:
-   - `sudo apt update`
-   - `sudo apt install -y python3-venv python3-pip libatlas-base-dev libopenblas-dev libjpeg-dev`
-
-## Instalacion
-
-```bash
-cd /home/enflujo/mapa-manos
-./guiones/preparar_pi.sh
-```
-
-## Ejecutar
-
-```bash
-./guiones/ejecutar_dev.sh
-```
-
-## Verificar camara
-
-```bash
-./guiones/probar_camara.sh
-```
-
-Abrir en navegador:
-
-- `http://<IP_DE_TU_PI>:8000`
-
-## Como usar tus PNG
-
-1. Organiza tus PNG en carpetas dentro de `assets/`.
-2. Ya estan soportadas estas categorias: `nombres-lugares`, `rios`, `barcos`, `paisaje`, `animales`.
-3. Ajusta estilo por categoria en `servidor/configuracion.py` (`ESTILO_POR_CATEGORIA`).
-4. Mueve la mano frente a la camara: las capas seguiran la palma.
-
-## Anclaje manual por mano y punto
-
-Al iniciar el servidor se crea (si no existe) el archivo `assets/anclajes_mano.json`.
-
-Ese documento te permite fijar cada dibujo a:
-
-1. Mano objetivo: `palma izquierda`, `palma derecha` o `ambas`.
-2. Punto de anclaje: `centro_palma`, `muneca`, `base_pulgar`, `punta_pulgar`, `base_indice`, `punta_indice`, `base_medio`, `punta_medio`, `base_anular`, `punta_anular`, `base_menique`, `punta_menique`.
-3. Coordenadas relativas al ancla: `desplazamientoRel` como `[dx, dy]` en unidades de ancho de palma.
-4. Escala/estilo por capa: `escalaRel`, `opacidad`, `fusion`, `rotacionExtra`.
-
-Ejemplo de entrada por capa:
-
-```json
-{
-   "id": "manomapa_elementos_mesa_1",
-   "archivo": "nombres-lugares/Manomapa elementos_Mesa 1.png",
-   "manoObjetivo": "palma derecha",
-   "ancla": "centro_palma",
-   "desplazamientoRel": [0.12, -0.08],
-   "escalaRel": 0.95,
-   "opacidad": 0.9,
-   "fusion": "source-over",
-   "rotacionExtra": 0.0
-}
-```
-
-## Notas de rendimiento
-
-- Resolucion recomendada para tracking estable: `640x480`.
-- Si baja FPS, reduce `FPS_OBJETIVO` o desactiva `ENVIAR_FOTOGRAMA` en `servidor/configuracion.py`.
-
-## Ajuste de orientacion por mano
-
-Si las capas de una mano se ven invertidas, puedes ajustar:
-
-- `CORRECCION_ROTACION_IZQUIERDA`
-- `CORRECCION_ROTACION_DERECHA`
-
-en `servidor/configuracion.py` (radianes). Por defecto la izquierda aplica 180 grados (`pi`).
-
-## Solucion de problemas
-
-- Si `mediapipe` no instala en tu imagen de Raspberry Pi OS, prueba una version alternativa para ARM (segun disponibilidad) y ajusta `requirements.txt`.
-- Si no abre la camara, verifica con `libcamera-hello` y revisa permisos/dispositivo.
+La cámara requiere HTTPS o `localhost`. El reconocimiento funciona mejor en navegadores modernos
+con WebAssembly y aceleración gráfica; si la GPU no está disponible, la aplicación cambia a CPU.
+El rendimiento final depende del dispositivo y conviene probar físicamente móviles y computadores
+de gama baja antes de una exhibición.
