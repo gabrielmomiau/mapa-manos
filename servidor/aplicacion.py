@@ -8,7 +8,7 @@ import smtplib
 import time
 from email.message import EmailMessage
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 import cv2
 import numpy as np
@@ -45,19 +45,27 @@ app.mount("/assets", StaticFiles(directory=str(Path(DIRECTORIO_ASSETS))), name="
 app.mount("/capturas", StaticFiles(directory=str(DIRECTORIO_CAPTURAS)), name="capturas")
 
 camara = FlujoCamara()
-rastreador = RastreadorMano()
-mapeador = MapeadorPalma()
+rastreador: Optional[RastreadorMano] = None
+mapeador: Optional[MapeadorPalma] = None
 
 
 @app.on_event("startup")
 def startup_event() -> None:
-    generar_documento_anclajes()
-    camara.start()
+    global rastreador, mapeador
+    try:
+        generar_documento_anclajes()
+        rastreador = RastreadorMano()
+        mapeador = MapeadorPalma()
+        camara.start()
+        LOGGER.info("✓ Startup completado exitosamente")
+    except Exception as exc:
+        LOGGER.error("⚠ Error en startup (continuando en modo degradado): %s", exc, exc_info=True)
 
 
 @app.on_event("shutdown")
 def shutdown_event() -> None:
-    rastreador.close()
+    if rastreador is not None:
+        rastreador.close()
     camara.stop()
 
 
@@ -176,6 +184,10 @@ async def flujo_vivo(ws: WebSocket) -> None:
 
 async def _flujo_servidor(ws: WebSocket) -> None:
     """El servidor lee su cámara física y envía fotogramas al cliente."""
+    if rastreador is None or mapeador is None:
+        await ws.close(code=1011, reason="Rastreador o mapeador no inicializados")
+        return
+    
     intervalo_fotograma = 1.0 / max(FPS_OBJETIVO, 1)
 
     try:
@@ -214,6 +226,10 @@ async def _flujo_servidor(ws: WebSocket) -> None:
 
 async def _flujo_navegador(ws: WebSocket) -> None:
     """El navegador envía fotogramas JPEG; el servidor devuelve detección de manos y capas."""
+    if rastreador is None or mapeador is None:
+        await ws.close(code=1011, reason="Rastreador o mapeador no inicializados")
+        return
+    
     try:
         while True:
             datos_raw = await ws.receive_bytes()
